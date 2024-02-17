@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+	<link rel="icon" href="https://loiseaubleu.s-ul.eu/aIEb7mHf">
+	<title>histoGRAPH Tools</title>
+	<style>
+		*{
+			box-sizing:border-box;
+		}
+
+		body{
+			color:#000;
+
+			background: #b8c6db linear-gradient(315deg, #b8c6db 0%, #f5f7fa 74%) no-repeat fixed center center;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+
+		body.darkmode{
+			background: #2b4162 linear-gradient(315deg, #2b4162 0%, #12100e 74%) no-repeat fixed center center;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+			color:rgb(243, 242, 242);
+		}
+
+		header {
+			margin: 1px;
+		}
+
+		header div.darkmode{
+
+
+		}
+		header div.darkmode::before{
+
+		}
+
+		header div.darkmode.active::before{
+
+		}
+
+		.chartButton{
+			font-size: 15px;
+			padding: 4px;
+			margin: 2px;
+			border: 2px solid #4CAF50;
+			border-radius: 10px;
+			cursor: pointer;
+			color: black;
+			background: transparent;
+		}
+
+		.chartButton:hover{
+			background: #2b4162 linear-gradient(315deg, #2b4162 0%, #12100e 74%) no-repeat fixed center center;
+			color: white;
+		}
+
+		button.chartButton.darkmode{
+			font-size: 15px;
+			padding: 4px;
+			margin: 2px;
+			border: 2px solid #4CAF50;
+			border-radius: 10px;
+			cursor: pointer;
+			color: white;
+			background:transparent;
+		}
+
+		button.chartButton:hover.darkmode{
+			background: #b8c6db linear-gradient(315deg, #b8c6db 0%, #f5f7fa 74%) no-repeat fixed center center;
+			color: black;
+		}
+
+
+		.activeBTN{
+			font-size: 15px;
+			padding: 4px;
+			margin: 2px;
+			border: 2px solid #71af74;
+			border-radius: 10px;
+			cursor: default;
+			color: white;
+			background: #2b4162 linear-gradient(315deg, #2b4162 0%, #12100e 74%) no-repeat fixed center center;
+		}
+
+		button.activeBTN.darkmode{
+			font-size: 15px;
+			padding: 4px;
+			margin: 2px;
+			border: 2px solid #71af74;
+			border-radius: 10px;
+			cursor: default;
+			color: black;
+			background: #b8c6db linear-gradient(315deg, #b8c6db 0%, #f5f7fa 74%) no-repeat fixed center center;
+		}
+
+		footer {
+			display: block;
+			padding: 10px;
+			text-align: justify;
+		}
+
+		.graph {
+			height: 350px;
+		}
+
+		.containerHeader {
+			display: grid;
+			grid-template-columns: 64px auto 64px;
+			grid-template-rows: 64px;
+			-ms-grid-columns: 64px auto 164px;
+			-ms-grid-rows: 64px;
+			grid-gap: 0px 25px;
+			gap: 0px 25px;
+			grid-template-areas:
+    			"img titleContainer btn_dark";
+
+			padding: 10px;
+			top: 0px;
+			left: 0px;
+			right: 0px;
+			margin-bottom: 0;
+			position: fixed;
+			min-width: 350px;
+
+			text-align: center;
+			height: auto;
+
+
+			z-index: 4;
+		}
+
+		.titleContainer{
+			grid-area: titleContainer;
+			border: 2px solid rgb(68, 63, 63);
+			border-radius: 15px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			background: #b8c6db linear-gradient(315deg, #b8c6db 0%, #f5f7fa 74%) no-repeat fixed center center;
+		}
+
+		div.titleContainer.darkmode{
+			grid-area: titleContainer;
+			border: 2px solid darkslategrey;
+			border-radius: 15px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			background: #2b4162 linear-gradient(315deg, #2b4162 0%, #12100e 74%) no-repeat fixed center center;
+		}
+
+		.title {
+			text-align: center;
+			font-size: 150%;
+		}
+
+		.darkmodeBtn {
+			grid-area: btn_dark;
+			border: 2px solid rgb(68, 63, 63);
+			padding: 5px;
+			border-radius: 15px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			cursor: pointer;
+			background: #b8c6db linear-gradient(315deg, #b8c6db 0%, #f5f7fa 74%) no-repeat fixed center center;
+		}
+
+		div.darkmodeBtn.darkmode{
+			grid-area: btn_dark;
+			border: 2px solid darkslategrey;
+			padding: 5px;
+			border-radius: 15px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			background: #2b4162 linear-gradient(315deg, #2b4162 0%, #12100e 74%) no-repeat fixed center center;
+		}
+
+		.darkmodeBtn p{
+			text-align: center;
+		}
+
+		.logo {
+			grid-area: img;
+			border-radius: 15px;
+			border: 2px solid rgb(68, 63, 63);
+			width: 64px;
+			height: 64px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			background: #b8c6db linear-gradient(315deg, #b8c6db 0%, #f5f7fa 74%) no-repeat fixed center center;
+		}
+
+		img.logo.darkmode {
+			grid-area: img;
+			border-radius: 15px;
+			border: 2px solid darkslategrey;
+			width: 64px;
+			height: 64px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			background: #2b4162 linear-gradient(315deg, #2b4162 0%, #12100e 74%) no-repeat fixed center center;
+		}
+
+		#page-container {
+			display: flex;
+			flex-direction: column;
+			height: 92vh;
+		}
+
+		#content-wrap {
+			flex: 1 0 auto;
+			margin-left: 10px;
+			margin-right: 10px;
+			text-align: center;
+			padding-top: 6em;
+		}
+
+		#footer {
+			height: auto;
+			bottom: 0px;
+			left: 0px;
+			right: 0px;
+			width: 100%;
+			flex-shrink: 0;
+			margin-top: auto;
+			text-align: center;
+			padding: 15px;
+			font-weight: bold;
+		}
+
+		.chart{
+			width: 45%;
+			/*height: 256px;*/
+
+		}
+
+		.card::-webkit-scrollbar {
+			width: 5px;
+			margin: 10px;
+			height: 5px;
+
+		}
+
+		/* Track */
+		.card::-webkit-scrollbar-track {
+			background: #A5D6A7;
+			border-radius: 20px;
+			margin: 10px;
+
+
+		}
+
+		/* Handle */
+		.card::-webkit-scrollbar-thumb {
+			background: #66BB6A;
+			border-radius: 20px;
+			margin: 10px;
+
+		}
+
+		/* Handle on hover */
+		.card::-webkit-scrollbar-thumb:hover {
+			background: #43A047;
+			border-radius: 20px;
+			margin: 10px;
+
+		}
+
+		.resultContainer{
+			display: flex;
+			justify-content: space-around;
+			flex-wrap: wrap;
+		}
+
+		.card{
+			border: 2px solid #4CAF50;
+			border-radius: 15px 14px;
+			padding: 5px;
+			overflow-y: auto;
+			max-height: 500px;
+			margin: 8px;
+		}
+
+		.card p {
+			margin: 5px;
+			font-size: 22px;
+		}
+
+		div.warning.darkmode{
+			color: #ffc440;
+			background-color: #AE2B1D;
+			padding: 5px 15px;
+			margin-bottom: 10px;
+			margin-top: 5px;
+			border: 2px solid #9b293d;
+			border-radius: 15px 14px;
+		}
+
+		div.warning.darkmode p {
+			margin: 5px; font-size: 22px
+		}
+
+		.canvasjs-chart-toolbar button{
+			background: transparent !important;
+		}
+
+		div.canvasjs-chart-toolbar.darkmode button{
+			background: transparent !important;
+			filter: invert(58%) sepia(13%) saturate(1898%) hue-rotate(73deg) brightness(99%) contrast(87%);
+		}
+
+
+
+		.project{
+			width: 45%;
+		}
+
+		.owner_img{
+			border-radius: 15px;
+			border: 2px solid rgb(68, 63, 63);
+			width: 64px;
+			height: 64px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		object.owner_img.darkmode{
+			border: 2px solid darkslategrey;
+			width: 64px;
+			height: 64px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			border-radius: 15px;
+		}
+
+		.owner {
+			border: 2px solid rgb(68, 63, 63);
+			border-radius: 15px 14px;
+			padding: 5px;
+
+			width: auto;
+			margin-bottom: 5px;
+			display: grid;
+			grid-template-columns: 64px auto;
+			grid-template-rows: auto 64px;
+			gap: 5px 5px;
+			grid-auto-flow: row;
+			grid-template-areas:
+            "ownerT ownerT"
+            "img name_mail";
+		}
+
+		div.owner.darkmode{
+			border: 2px solid darkslategrey;
+			border-radius: 15px 14px;
+			padding: 5px;
+
+			width: auto;
+			margin-bottom: 5px;
+			display: grid;
+			grid-template-columns: 64px auto;
+			grid-template-rows: auto 64px;
+			gap: 5px 5px;
+			grid-auto-flow: row;
+			grid-template-areas:
+            "ownerT ownerT"
+            "img name_mail";
+
+		}
+
+		.ownerT{
+			grid-area: ownerT;
+			padding: 0;
+			margin: 0;
+			font-size: 20px;
+			text-decoration: underline;
+		}
+
+		.name_mail {
+			display: grid;
+			grid-template-columns: auto;
+			grid-template-rows: auto auto;
+			gap: 10px 0px;
+			grid-auto-flow: row;
+			grid-template-areas:
+            "name"
+            "mail";
+			grid-area: name_mail;
+
+			text-align: left;
+			margin-left: 5px;
+			margin-top: auto;
+			margin-bottom: auto;
+			font-size: 18px;
+		}
+
+		.name { grid-area: name; }
+
+		.mail { grid-area: mail; }
+
+		.owner_img { grid-area: img; }
+
+
+		.project_info {
+			display: grid;
+			grid-template-columns: auto auto auto auto;
+			grid-template-rows: auto auto auto auto;
+			gap: 0px 0px;
+			grid-auto-flow: row dense;
+			grid-template-areas:
+            "star project_name project_name fork"
+            "createDate createDate visibility1 visibility1"
+            "lastActivity lastActivity openIssues openIssues"
+            "owner owner owner owner";
+
+			border: 2px solid rgb(68, 63, 63);
+			border-radius: 15px 14px;
+			padding: 5px;
+			margin: 5px 5px 10px;
+
+			font-size: 18px;
+
+		}
+
+		div.project_info.darkmode{
+			display: grid;
+			grid-template-columns: auto auto auto auto;
+			grid-template-rows: auto auto auto auto;
+			gap: 0px 0px;
+			grid-auto-flow: row dense;
+			grid-template-areas:
+            "star project_name project_name fork"
+            "createDate createDate visibility1 visibility1"
+            "lastActivity lastActivity openIssues openIssues"
+            "owner owner owner owner";
+
+			border: 2px solid darkslategrey;
+			border-radius: 15px 14px;
+			padding: 5px;
+			margin: 5px 5px 10px;
+
+			font-size: 18px;
+		}
+
+		.project_name {
+			grid-area: project_name;
+		}
+
+		.star {
+			display: grid;
+			grid-template-columns: 21px auto auto;
+			grid-template-rows: auto;
+			gap: 5px 5px;
+			grid-auto-flow: row;
+			grid-template-areas:
+            "start_img star_title star_num";
+			grid-area: star;
+
+			font-size: 18px;
+
+		}
+
+		.start_img {
+			grid-area: start_img;
+			width: 21px;
+			height: 21px;
+			margin-top: auto;
+			margin-bottom: auto;
+		}
+
+		.star_title {
+			grid-area: star_title;
+			margin-top: auto;
+			margin-bottom: auto;
+		}
+
+		.star_num {
+			grid-area: star_num;
+			margin-top: auto;
+			margin-bottom: auto;
+		}
+
+		.fork {
+			display: grid;
+			grid-template-columns: auto auto auto;
+			grid-template-rows: auto;
+			gap: 5px 5px;
+			grid-auto-flow: row;
+			grid-template-areas:
+            "fork_img fork_title fork_num";
+			grid-area: fork;
+
+			font-size: 18px;
+
+		}
+
+		.fork_img {
+			grid-area: fork_img;
+			width: 21px;
+			height: 21px;
+			margin-top: auto;
+			margin-bottom: auto;
+		}
+
+		.fork_img.darkmode circle,.fork_img.darkmode path,.fork_img.darkmode line{
+			stroke: #FFFFFF;
+		}
+
+		.start_img.darkmode circle,.start_img.darkmode path,.start_img.darkmode line{
+			stroke: #FFFFFF;
+		}
+
+		.fork_title {
+			grid-area: fork_title;
+			margin-top: auto;
+			margin-bottom: auto;
+		}
+
+		.fork_num {
+			grid-area: fork_num;
+			margin-top: auto;
+			margin-bottom: auto;
+		}
+
+		.createDate { grid-area: createDate; text-align: left;}
+
+		.visibility { grid-area: visibility1; text-align: right;}
+
+		.lastActivity { grid-area: lastActivity; text-align: left;}
+
+		.openIssues { grid-area: openIssues; text-align: right;}
+
+		.owner {
+			grid-area: owner;
+			margin-left: 5px;
+			margin-right: 5px;
+			text-align: center;
+		}
+
+
+
+	</style>
+	<script>
+		document.addEventListener('DOMContentLoaded',function(){
+			darkmode_init();
+		});
+
+		function darkmode_init(){
+			let darkmodeSwitch = document.querySelector('header .darkmodeBtn');
+
+			var darkmodeCookie = {
+				set:function(key,value,time,path,secure=false)
+				{
+					let expires = new Date();
+					expires.setTime(expires.getTime() + time);
+					var path   = (typeof path !== 'undefined') ? pathValue = 'path=' + path + ';' : '';
+					var secure = (secure) ? ';secure' : '';
+
+					document.cookie = key + '=' + value + ';' + path + 'expires=' + expires.toUTCString() + secure;
+				},
+				get:function()
+				{
+					let keyValue = document.cookie.match('(^|;) ?darkmode=([^;]*)(;|$)');
+					return keyValue ? keyValue[2] : null;
+				},
+				remove:function()
+				{
+					document.cookie = 'darkmode=; Max-Age=0; path=/';
+				}
+			};
+
+			if(darkmodeCookie.get() == 'true')
+			{
+				darkmodeSwitch.classList.add('active');
+				document.body.classList.add('darkmode');
+				let content = document.querySelector('.titleContainer');
+				content.classList.add('darkmode');
+				content = document.querySelector('.darkmodeBtn');
+				content.classList.add('darkmode');
+				content = document.querySelector('.logo');
+				content.classList.add('darkmode');
+				content = document.getElementsByClassName('chartButton');
+				for(var i = 0; i < content.length; i++){
+					content[i].classList.add('darkmode');
+				}
+				updateBtnName(false);
+				updateChartTheme(true);
+				updateElement(false);
+
+			}else{
+				updateChartTheme(false);
+				updateBtnName(true);
+				updateElement(true);
+
+			}
+
+
+			darkmodeSwitch.addEventListener('click', (event) => {
+				event.preventDefault();
+				event.target.classList.toggle('active');
+				document.body.classList.toggle('darkmode');
+				let content = document.querySelector('.titleContainer');
+				content.classList.toggle('darkmode');
+				content = document.querySelector('.darkmodeBtn');
+				content.classList.toggle('darkmode');
+				content = document.querySelector('.logo');
+				content.classList.toggle('darkmode');
+				content = document.getElementsByClassName('chartButton');
+				for(var i = 0; i < content.length; i++){
+					content[i].classList.toggle('darkmode');
+				}
+				if(document.body.classList.contains('darkmode'))
+				{
+					darkmodeCookie.set('darkmode','true',2628000000,'/',false);
+					updateChartTheme(true);
+					updateBtnName(false);
+					updateElement(false);
+
+				}
+				else
+				{
+					darkmodeCookie.remove();
+					updateChartTheme(false);
+					updateBtnName(true);
+					updateElement(true);
+				}
+			});
+		}
+
+		function updateBtnName(white){
+			let content = document.querySelector('.darkmodeBtn');
+			if(typeof content !== 'undefined') {
+				if (white) {
+					content.innerHTML = "Dark\nMode";
+				} else {
+					content.innerHTML = "White\nMode";
+				}
+			}
+		}
+
+		function updateElement(white){
+			let content = document.querySelector('.warning');
+			if(typeof content !== 'undefined' && content !== null) {
+				if (white) {
+					content.classList.remove('darkmode');
+				} else {
+					content.classList.add('darkmode');
+				}
+			}
+
+			let t2 = document.querySelector('.owner_img');
+			if(typeof t2 !== 'undefined' && t2 !== null) {
+				if (white) {
+					t2.classList.remove('darkmode');
+				} else {
+					t2.classList.add('darkmode');
+				}
+			}
+
+			let t3 = document.querySelector('.owner');
+			if(typeof t3 !== 'undefined' && t3 !== null) {
+				if (white) {
+					t3.classList.remove('darkmode');
+				} else {
+					t3.classList.add('darkmode');
+				}
+			}
+
+			let t4 = document.querySelector('.project_info');
+			if(typeof t4 !== 'undefined' && t4 !== null) {
+				if (white) {
+					t4.classList.remove('darkmode');
+				} else {
+					t4.classList.add('darkmode');
+				}
+			}
+
+			let t5 = document.querySelector('.project_name');
+			if(typeof t5 !== 'undefined' && t5 !== null) {
+				if (white) {
+					t5.style.color = "#000000";
+
+				} else {
+					t5.style.color = "white";
+
+				}
+			}
+
+			let t6 = document.querySelector('.start_img');
+			if(typeof t6 !== 'undefined' && t6 !== null) {
+				if (white) {
+					t6.classList.remove('darkmode');
+				} else {
+					t6.classList.add('darkmode');
+				}
+			}
+
+			let t7 = document.querySelector('.fork_img');
+			if(typeof t7 !== 'undefined' && t7 !== null) {
+				if (white) {
+					t7.classList.remove('darkmode');
+				} else {
+					t7.classList.add('darkmode');
+				}
+			}
+
+			t8 = document.getElementsByClassName('canvasjs-chart-toolbar');
+			if(t8 !== 'undefined' && t8 !== null){
+				for(var i = 0; i < t8.length; i++){
+					if (white) {
+						t8[i].classList.remove('darkmode');
+					} else {
+						t8[i].classList.add('darkmode');
+					}
+				}
+			}
+		}
+
+		function updateChartTheme(dark) {
+			$replaceUpdate
+		}
+	</script>
+</head>
+<body>
+<header>
+	<div class="containerHeader">
+		<div class="darkmodeBtn">
+			<p>
+				Dark
+				Mode
+			</p>
+		</div>
+		<img class="logo" src="https://loiseaubleu.s-ul.eu/aIEb7mHf" alt="LOGO_nom_du_site">
+		<div class="titleContainer">
+			<img class="title" src="https://loiseaubleu.s-ul.eu/pluiIhcF" alt="LOGO_text" style="width: auto; height: 100%;">
+		</div>
+	</div>
+</header>
+<div id="page-container">
+	<div id="content-wrap">
+		<div class="resultContainer">
+			$remplacer
+		</div>
+	</div>
+	<footer id="footer"><span>histoGRAPH Copyright &copy; <script>document.write(new Date().getFullYear())</script></span></footer>
+</div>
+</body>
+
+</html>

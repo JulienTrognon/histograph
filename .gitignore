@@ -1,0 +1,14 @@
+.classpath
+build/
+.settings/
+.project
+bin/
+.gradle/
+/cli/visulog_output/
+/.idea/
+/cli/visulog/
+/visulog/
+/webgen/out/
+/gitrawdata/out/
+
+/cli/histoGRAPH/

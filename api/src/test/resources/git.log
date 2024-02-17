@@ -1,0 +1,39 @@
+commit 9e74f1581f23aaad21e2b936091d3ce371336e22
+Author: Aldric Degorre <adegorre@irif.fr>
+Date:   Mon Aug 31 11:28:28 2020 +0200
+
+    Update README.md - more modules
+
+2	1	README.md
+
+commit 7484b0cb7b4e69e09c82ed38549750fa2a77f50c
+Author: Aldric Degorre <adegorre@irif.fr>
+Date:   Thu Aug 27 00:35:19 2020 +0200
+
+    Update README.md - translation...
+
+1	3	README.md
+
+commit 9aaf6e09cc30909b32c68b4d5bf4ac50f95ecb93
+Author: Aldric Degorre <adegorre@irif.fr>
+Date:   Thu Aug 27 00:33:46 2020 +0200
+
+    Update README.md - some title left untranslated
+
+1	1	README.md
+
+commit 969e2247156f27f27fec57b13faf6097bf4e2757
+Author: Aldric Degorre <adegorre@irif.fr>
+Date:   Thu Aug 27 00:32:47 2020 +0200
+
+    Update README.md -> in English, with some more details
+
+30	11	README.md
+
+commit 486d76dbfd24ac65eeeeb16e57ae4fd68c8ecb1c
+Author: Aldric Degorre <adegorre@irif.fr>
+Date:   Thu Aug 27 00:02:55 2020 +0200
+
+    Ajout de README.md avec définition des grandes lignes du sujet.
+
+18	0	README.md

@@ -1,0 +1,144 @@
+#########################
+#                       #
+#     Configuration     #
+#                       #
+#########################
+
+###############
+#   General   #
+###############
+project_name: "name"
+use_other_git_path: false
+git_path: ""
+
+###############
+#   Web Api   #
+###############
+use_web_api: false
+#   gihub gitlab bitbucket ....   #
+service: "gitlab"
+#   with http or https   #
+url: "https://gaufre.informatique.univ-paris-diderot.fr"
+project_id: 0000
+private_repo: false
+
+##########################################
+#                Security                #
+#         If private_repo is true        #
+#   (Or you can add directly on the url  #
+#     and turn private_repo to false)    #
+#                Exemple:                #
+# url/?private_token=<your_access_token> #
+##########################################
+parameter: "private_token"
+#   Personal or project access token   #
+token: "your_access_token"
+
+#############################################################
+#                          Plugins                          #
+#         if html_output and json_output is on false        #
+#              the plugins will be deactivated              #
+#         You can find all chart type on this link:         #
+# https://canvasjs.com/docs/charts/chart-options/data/type/ #
+#############################################################
+plugins:
+  - countCommits:
+      enable: true
+      html_output: true
+      json_output: true
+      chartTypes:
+        - column
+        - line
+        - bar
+        - area
+        - spline
+        - splineArea
+        - stepLine
+        - scatter
+        - bubble
+        - stackedColumn
+        - stackedBar
+        - stackedArea
+        - pie
+        - doughnut
+  - countCommitPerDay:
+      enable: true
+      html_output: true
+      json_output: true
+      chartTypes:
+        - pie
+        - column
+        - line
+        - bar
+        - area
+        - spline
+        - splineArea
+        - stepLine
+        - scatter
+        - bubble
+        - stackedColumn
+        - stackedBar
+        - stackedArea
+        - doughnut
+  - countAuthors:
+      enable: true
+      html_output: true
+      json_output: true
+      #USELESS
+      chartTypes:
+        - none
+  - countLineChangedPerAuthor:
+      enable: true
+      html_output: true
+      json_output: true
+      chartTypes:
+        - column
+        - line
+        - bar
+        - area
+  - nbrMerges:
+      enable: true
+      html_output: true
+      json_output: true
+      chartTypes:
+        - column
+        - line
+        - bar
+        - area
+        - spline
+        - stackedColumn
+        - stackedBar
+        - pie
+        - doughnut 
+  - languagesPercentage:
+      #API PLUGIN
+      enable: true
+      html_output: true
+      json_output: true
+      chartTypes:
+        - pie
+  - downloadProject:
+      #API PLUGIN
+      enable: true
+      html_output: true
+      json_output: true
+      #USELESS
+      chartTypes:
+        - none
+  - branchesList:
+      #API PLUGIN
+      enable: true
+      html_output: true
+      json_output: true
+      #USELESS
+      chartTypes:
+        - none  
+  - projectInfo:
+      #API PLUGIN
+      #Need a token for proper functioning (and set to true private_repo)
+      enable: true
+      html_output: true
+      json_output: true
+      #USELESS
+      chartTypes:
+        - none  
