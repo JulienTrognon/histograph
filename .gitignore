@@ -10,5 +10,5 @@ bin/
 /visulog/
 /webgen/out/
 /gitrawdata/out/
-
+*.mp4
 /cli/histoGRAPH/
