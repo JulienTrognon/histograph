@@ -20,8 +20,8 @@ public class nbrMerges implements AnalyzerPlugin {
     public static final String pluginName = "nbrMerges";
 
     public nbrMerges(PluginConfig pg, Configuration generalConfiguration ) {
-        this.configuration = generalConfiguration;
-        this.pg=pg;
+        nbrMerges.configuration = generalConfiguration;
+        nbrMerges.pg=pg;
     }
 
     Result calcul(List<Commit> l){
@@ -172,7 +172,7 @@ public class nbrMerges implements AnalyzerPlugin {
                 }
             }
         }
-        private void removeDuplicate(ArrayList<Map.Entry<String, Integer>> authorSetList, Map.Entry element, int startId, boolean mail, boolean other) {    // use of additional variables to avoid hardcoding
+        private void removeDuplicate(ArrayList<Map.Entry<String, Integer>> authorSetList, @SuppressWarnings("rawtypes") Map.Entry element, int startId, boolean mail, boolean other) {    // use of additional variables to avoid hardcoding
             String[] author = element.getKey().toString().toLowerCase().split(" ");
             for (int j = startId; j < authorSetList.size(); j++) {
                 String infoAuthor = authorSetList.get(j).getKey().toLowerCase();

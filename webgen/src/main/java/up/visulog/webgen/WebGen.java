@@ -6,10 +6,10 @@ import up.visulog.analyzer.*;
 import up.visulog.util.*;
 import java.awt.Desktop;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
+// import java.io.BufferedWriter;
+// import java.io.FileWriter;
 import java.io.IOException;
-import java.net.URISyntaxException;
+// import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.io.File;
 import java.util.Arrays;
@@ -19,7 +19,7 @@ import java.net.URI;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import up.visulog.util.Logger;
+// import up.visulog.util.Logger;
 
 public class WebGen {
 

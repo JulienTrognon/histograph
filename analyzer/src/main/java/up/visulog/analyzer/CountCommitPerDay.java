@@ -13,7 +13,7 @@ import org.json.JSONObject;
 import up.visulog.util.SaveFile;
 
 import java.util.Date;
-import java.time.LocalDate;
+// import java.time.LocalDate;
 import java.util.LinkedHashMap;
 
 
@@ -28,8 +28,8 @@ public class CountCommitPerDay implements AnalyzerPlugin{
 
 
     public CountCommitPerDay(PluginConfig pluginConfig, Configuration configuration){
-		this.configuration=configuration;
-        this.pluginConfig = pluginConfig;
+		CountCommitPerDay.configuration=configuration;
+        CountCommitPerDay.pluginConfig = pluginConfig;
 	}
 
 	static Result processLog(List<Commit> gitLog){

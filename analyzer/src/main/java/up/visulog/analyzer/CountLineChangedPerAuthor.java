@@ -22,7 +22,7 @@ public class CountLineChangedPerAuthor implements AnalyzerPlugin {
 
     public CountLineChangedPerAuthor(PluginConfig pluginConfig, Configuration generalConfiguration) {
         configuration = generalConfiguration;
-        this.pluginConfig = pluginConfig;
+        CountLineChangedPerAuthor.pluginConfig = pluginConfig;
     }
 
     static Result processLog(List<Commit> log) {

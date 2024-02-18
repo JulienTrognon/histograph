@@ -24,7 +24,7 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
 
     public CountCommitsPerAuthorPlugin(PluginConfig pluginConfig, Configuration generalConfiguration) {
         configuration = generalConfiguration;
-        this.pluginConfig = pluginConfig;
+        CountCommitsPerAuthorPlugin.pluginConfig = pluginConfig;
     }
 
     static Result processLog(List<Commit> gitLog) {
@@ -182,7 +182,7 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
             }
         }
 
-        private void removeDuplicate(ArrayList<Map.Entry<String, Integer>> authorSetList, Map.Entry element, int startId, boolean mail, boolean other) {    // use of additional variables to avoid hardcoding
+        private void removeDuplicate(ArrayList<Map.Entry<String, Integer>> authorSetList, @SuppressWarnings("rawtypes") Map.Entry element, int startId, boolean mail, boolean other) {    // use of additional variables to avoid hardcoding
             String[] author = element.getKey().toString().toLowerCase().split(" ");
             for (int j = startId; j < authorSetList.size(); j++) {
                 String infoAuthor = authorSetList.get(j).getKey().toLowerCase();

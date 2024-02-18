@@ -11,7 +11,7 @@ import up.visulog.util.Logger;
 import java.io.File;
 import java.nio.file.*;
 import java.util.*;
-import up.visulog.webgen.*;
+// import up.visulog.webgen.*;
 
 public class CLILauncher {
 
@@ -30,7 +30,7 @@ public class CLILauncher {
 
             results.toJsonFile();
             results.toHtmlFile();
-            WebGen a = new WebGen(results);
+            new WebGen(results);
         } else log.errorFatal("An error has occurred.");
 
     }

@@ -21,16 +21,20 @@ public class AnalyzerResult {
         this.config = config1;
     }
 
+    public Configuration getConfig() {
+        return config;
+    }
+
     @Override
     public String toString() {
         return subResults.stream().map(AnalyzerPlugin.Result::getResultAsString).reduce("", (acc, cur) -> acc + "\n" + cur);
     }
 
     public String toHTML() {
-        List<AnalyzerPlugin.Result>  a =  subResults.stream()
-                                                    .sorted(Comparator.comparing(AnalyzerPlugin.Result :: getPluginName)
-                                                    .reversed())
-                                                    .collect(Collectors.toList());
+        subResults.stream()
+                  .sorted(Comparator.comparing(AnalyzerPlugin.Result :: getPluginName)
+                  .reversed())
+                  .collect(Collectors.toList());
         return subResults.stream().map(AnalyzerPlugin.Result::getResultAsHtmlDiv).reduce("", (acc, cur) -> acc + "\n" + cur);
     }
 
